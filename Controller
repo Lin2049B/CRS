@@ -1,0 +1,41 @@
+package ui;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+
+import java.time.LocalDate;
+
+public class StudentController {
+    @FXML private TextField nameInput;
+    @FXML private TextField contactInput;
+    @FXML private TextField addressInput;
+    @FXML private DatePicker dobPicker;
+    @FXML private Button savevutton;
+
+    @FXML
+    public void initialize() {
+        // Initialization logic (if needed)
+    }
+
+    @FXML
+    public void handleRegister() {
+        String name = nameInput.getText();
+        String contact = contactInput.getText();
+        String address = addressInput.getText();
+        LocalDate dob = dobPicker.getValue();
+
+        if (name.isEmpty() || contact.isEmpty() || address.isEmpty() || dob == null) {
+            showAlert("Error", "Please fill all fields!");
+        } else {
+            showAlert("Success", "Registered: " + name + "\nDOB: " + dob);
+        }
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+}
